@@ -2,6 +2,7 @@ import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, Routes, RouterModule } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
+import { SubstanceFormModule } from '../../core/substance-form/substance-form.module';
 import { ImpurityFormComponent } from './impurity-form/impurity-form.component';
 
 const impurityRoutes: Routes = [
@@ -16,7 +17,8 @@ const impurityRoutes: Routes = [
   imports: [
     RouterModule.forChild(impurityRoutes),
     CommonModule,
-    MatCardModule
+    MatCardModule,
+    SubstanceFormModule,
   ]
 })
 

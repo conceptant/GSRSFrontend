@@ -19,6 +19,7 @@ import { ApplicationModule} from './application/application.module';
 import { SubstanceApplicationMatchListModule } from './substance-browse/substance-application-match-list/substance-application-match-list.module';
 import { ProductModule} from './product/product.module';
 import { ClinicalTrialsModule } from './clinical-trials/clinical-trials.module';
+import { ImpurityModule } from './impurity/impurity.module';
 import { UserManualModule } from './user-manual/user-manual.module';
 import { JiraSubmitTicketModule } from './jira-submit-ticket/jira-submit-ticket.module';
 import { SubstanceCountsComponent } from './substance-browse/substance-counts/substance-counts.component';
@@ -69,6 +70,7 @@ export function init_sso_refresh_service(ssoService: SsoRefreshService) {
     ApplicationModule,
     ProductModule,
     SubstanceApplicationMatchListModule,
+    ImpurityModule,
     UserManualModule,
     JiraSubmitTicketModule,
     MatCardModule,

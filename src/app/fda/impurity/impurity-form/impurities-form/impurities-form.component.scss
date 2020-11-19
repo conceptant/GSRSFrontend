@@ -249,6 +249,12 @@
   border: 1px solid green;
 }
 
+.borderbottom {
+  border-bottom: 2px solid blue;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
 .width40px {
   width: 40px;
 }
@@ -263,6 +269,10 @@
 
 .colorred {
   color: red;
+}
+
+.colorblue {
+  color: blue;
 }
 
 .font11px {
@@ -355,4 +365,12 @@
 
 .divclear {
   clear: both;
+}
+
+.padleft {
+  padding-left: 5px;
+}
+
+.padright {
+  padding-right: 5px;
 }

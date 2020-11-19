@@ -9,7 +9,7 @@ import { UtilsService } from '@gsrs-core/utils/utils.service';
 import { AuthService } from '@gsrs-core/auth/auth.service';
 import { ControlledVocabularyService } from '../../../core/controlled-vocabulary/controlled-vocabulary.service';
 import { VocabularyTerm } from '../../../core/controlled-vocabulary/vocabulary.model';
-import { Impurity, ValidationMessage } from '../model/impurity.model';
+import { Impurity, SubRelationship, ValidationMessage } from '../model/impurity.model';
 import { Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';
@@ -51,8 +51,10 @@ export class ImpurityFormComponent implements OnInit {
   statusDateMessage = '';
   appForm: FormGroup;
   isAdmin = false;
+  subRelationship: Array<SubRelationship> = [];
 
-  constructor(private impurityService: ImpurityService,
+  constructor(
+    private impurityService: ImpurityService,
     private authService: AuthService,
     private loadingService: LoadingService,
     private mainNotificationService: MainNotificationService,
@@ -81,7 +83,7 @@ export class ImpurityFormComponent implements OnInit {
           if (id !== this.id) {
             this.id = id;
             this.gaService.sendPageView(`Impurity Edit`);
-         //   this.getApplicationDetails();
+            //   this.getApplicationDetails();
             //   this.getVocabularies();
           }
         } else {
@@ -97,6 +99,10 @@ export class ImpurityFormComponent implements OnInit {
         }
       });
     this.subscriptions.push(routeSubscription);
+
+    if (this.impurity) {
+      this.impurity.parentSubstanceId = '479f1396-4958-4f59-9d41-0bd0468c8da7';
+    }
   }
 
   ngAfterViewInit(): void {
@@ -107,6 +113,86 @@ export class ImpurityFormComponent implements OnInit {
     this.subscriptions.forEach(subscription => {
       subscription.unsubscribe();
     });
+  }
+
+  showJSON(): void {
+    const dialogRef = this.dialog.open(JsonDialogFdaComponent, {
+      width: '90%',
+      height: '90%',
+      data: this.impurity
+    });
+
+    //   this.overlayContainer.style.zIndex = '1002';
+    const dialogSubscription = dialogRef.afterClosed().subscribe(response => {
+    });
+    this.subscriptions.push(dialogSubscription);
+
+  }
+
+  validate(validationType?: string): void {
+    /*
+    this.isLoading = true;
+    this.serverError = false;
+    this.loadingService.setLoading(true);
+
+    this.validateClient();
+    // If there is no error on client side, check validation on server side
+    if (this.validationMessages.length === 0) {
+      this.applicationService.validateApplication().pipe(take(1)).subscribe(results => {
+        this.submissionMessage = null;
+        this.validationMessages = results.validationMessages.filter(
+          message => message.messageType.toUpperCase() === 'ERROR' || message.messageType.toUpperCase() === 'WARNING');
+        this.validationResult = results.valid;
+        this.showSubmissionMessages = true;
+        this.loadingService.setLoading(false);
+        this.isLoading = false;
+        if (this.validationMessages.length === 0 && this.validationResult === true) {
+          this.submissionMessage = 'Application is Valid. Would you like to submit?';
+        }
+      }, error => {
+        this.addServerError(error);
+        this.loadingService.setLoading(false);
+        this.isLoading = false;
+      });
+
+    }
+    */
+  }
+
+  addNewTest() {
+    this.impurityService.addNewTest();
+  }
+
+  addNewImpurities() {
+    this.impurityService.addNewImpurities();
+  }
+
+  getImpurities() {
+    this.impurityService.getRelationshipImpurity(this.impurity.parentSubstanceId).subscribe(response => {
+      this.subRelationship = response.data;
+
+      //  this.impurity.impuritiesList[0].relationshipList = response[0];
+      console.log(JSON.stringify(this.subRelationship));
+     // alert(this.subRelationship.length);
+    });
+
+   // alert(this.subRelationship.length);
+    this.subRelationship.forEach((elementRel, indexRel) => {
+    //   console.log('Index: ' + indexRel);
+    //   this.addNewImpurities();
+     //  this.impurity.impuritiesList[indexRel].relatedSubstanceUuid = elementRel.substanceId;
+      
+      // this.impurity.impuritiesList[indexRel].subRelationship = elementRel;
+      // this.impurity.impuritiesList[indexRel].maturityType = 'Type' + indexRel;
+       console.log('AAAA' + JSON.stringify(elementRel));
+    //   console.log('GG' + JSON.stringify(this.impurity.impuritiesList[indexRel].subRelationship));
+     // alert(this.impurity.impuritiesList.length);
+    });
+
+  }
+
+  getRelationshipImpurity(substanceId: string) {
+    this.impurityService.getRelationshipImpurity(substanceId);
   }
 
 }

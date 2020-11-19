@@ -1,13 +1,33 @@
 export interface Impurity {
   id?: number;
-  impurity?: string;
-  impurityType?: string;
-  parentId?: string;
+  parentSubstanceId?: string;
+  source?: string;
+  type?: string;
+  specType: string;
   createdBy?: string;
   createDate?: number;
   modifiedBy?: string;
   modifyDate?: number;
   internalVersion?: number;
+  impuritiesList?: Array<Impurities>;
+}
+
+export interface Impurities {
+  id?: number;
+  relatedSubstanceUuid?: string;
+  testType?: string;
+  limit?: number;
+  subRelationship?: SubRelationship;
+}
+
+export interface SubRelationship {
+  id?: string;
+  substanceId?: string;
+  ownerBdnum?: string;
+  relationshipType?: string;
+  relationshipUuid?: string;
+  relationshipName?: string;
+  relationshipUnii?: string;
 }
 
 export interface ValidationResults {

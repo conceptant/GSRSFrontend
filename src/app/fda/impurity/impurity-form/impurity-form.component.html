@@ -11,7 +11,7 @@
     <span *ngIf="impurity">
       <span *ngIf="impurity.id">
         <button mat-flat-button color="primary" [routerLink]="['/application/register']"
-          matTooltip='Register a New Impurity'>
+          matTooltip='Register Impurities'>
           Register New Application
         </button>&nbsp;&nbsp;&nbsp;
         <button mat-flat-button color="primary" [routerLink]="['/applicationDetails', application.id]"
@@ -86,9 +86,6 @@
 
         <mat-card class="bordergray">
           <mat-card-content>
-
-            
-
                <!-- Impurities Form -->
                <app-impurities-form [impurity]="impurity"></app-impurities-form>
 

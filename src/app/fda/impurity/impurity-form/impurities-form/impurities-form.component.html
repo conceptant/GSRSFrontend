@@ -57,19 +57,328 @@
 
       </div>
 
-      <!--
-    <mat-form-field class="col-2">
-      <input matInput placeholder="Substance Name" [(ngModel)]="impur.relatedSubstanceUuid" name="Name" />
-    </mat-form-field>
-    -->
-      <app-cv-input class="col-2" domain="SSG_IMPURITY_TYPE" title="Test Type" name="source" [model]="impurity.testType"
+      <app-cv-input class="col-1" domain="SSG_IMPURITY_TYPE" title="Impurity Type" name="source"
+        [model]="impurity.impurityType" (valueChange)="impurity.impurityType = $event">
+      </app-cv-input>
+
+      <app-cv-input class="col-1" domain="SSG_IMPURITY_TYPE" title="Test Type" name="source" [model]="impurity.testType"
         (valueChange)="impurity.testType = $event">
       </app-cv-input>
 
-      <mat-form-field class="col-2">
+      <mat-form-field class="col-1">
         <input matInput placeholder="Limit" [(ngModel)]="impur.limit" name="limit" />
       </mat-form-field>
 
     </div>
+
+    <div class="form-row borderbottom"> 
+      <app-cv-input class="col-1" domain="SSG_IMPURITY_TYPE" title="Limit Type" name="limitType"
+        [model]="impurity.limitType" (valueChange)="impurity.limitType = $event">
+      </app-cv-input>
+
+      <mat-form-field class="col-1">
+        <input matInput placeholder="Total Impurity" [(ngModel)]="impur.totalImpurity" name="totalImpurity" />
+      </mat-form-field>
+
+      <mat-form-field class="col-1">
+        <input matInput placeholder="Unspecified Impurity" [(ngModel)]="impur.unspecifiedImpurity"
+          name="unspecifiedImpurity" />
+      </mat-form-field>
+    </div>
+
+
+    <div class="form-row borderbottom"> 
+      <div class="col-1">
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <button mat-raised-button color="primary" (click)="addImpurity()" matTooltip="Add Impurity for Substance">
+          Add Identity Critieria
+        </button>
+      </div>
+      <app-cv-input class="col-1" domain="SSG_IMPURITY_TYPE" title="Identity Criteria Type" name="limitType"
+        [model]="impurity.limitType" (valueChange)="impurity.limitType = $event">
+      </app-cv-input>
+
+      <mat-form-field class="col-1">
+        <input matInput placeholder="Amount Value" [(ngModel)]="impur.totalImpurity" name="totalImpurity" />
+      </mat-form-field>
+
+    </div>
+
   </div> <!-- repeat -->
+
+
+  <div>
+    <h2><span class="colorblue">Unspecified Impurities</span></h2>
+  </div>
+  <div class="col-1">
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    <button mat-raised-button color="primary" (click)="addImpurity()" matTooltip="Add Impurity for Substance">
+      Add Unspecified Impurity
+    </button>
+  </div>
+
+  <div class="form-row">
+    <div>
+      <h2><span class="colorblue">Unspecified Impurities</span></h2>
+    </div>
+    <div class="col-1">
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <button mat-raised-button color="primary" (click)="addImpurity()" matTooltip="Add Impurity for Substance">
+        Add Unspecified Impurity
+      </button>
+    </div>
+  </div>
+
+  <br><br>
+  <div class="bordergray padleft padright">
+    <div *ngFor="let impur of impurity.impuritiesList; let impIndex = index">
+  
+      <div class="form-row borderbottom">
+  
+        <div class="col-2 flex-column related-substance">
+  
+          <div class="related-substance-border">
+            {{(impIndex+1)}}
+            <!--
+          <app-substance-search-selector (selectionUpdated)="ingredientNameUpdated($event)"
+            (showMessage)="showMessageIngredientName($event)" eventCategory="ingredName" placeholder="Ingredient Name"
+            header="Ingredient Name" [subuuid]="impur.relatedSubstanceUuid">
+          </app-substance-search-selector>
+        -->
+            <app-substance-selector (selectionUpdated)="relatedSubstanceUpdated($event)"
+              eventCategory="substanceRelationshipRelatedSub" placeholder="Related Substance" [hideImage]="false"
+              header="Related Substance" [subuuid]="impur.relatedSubstanceUuid">
+            </app-substance-selector>
+          </div>
+  
+        </div>
+  
+        <app-cv-input class="col-1" domain="SSG_IMPURITY_TYPE" title="Impurity Type" name="source"
+          [model]="impurity.impurityType" (valueChange)="impurity.impurityType = $event">
+        </app-cv-input>
+  
+        <app-cv-input class="col-1" domain="SSG_IMPURITY_TYPE" title="Test Type" name="source" [model]="impurity.testType"
+          (valueChange)="impurity.testType = $event">
+        </app-cv-input>
+  
+        <mat-form-field class="col-1">
+          <input matInput placeholder="Limit" [(ngModel)]="impur.limit" name="limit" />
+        </mat-form-field>
+  
+      </div>
+  
+      <div class="form-row borderbottom"> 
+        <app-cv-input class="col-1" domain="SSG_IMPURITY_TYPE" title="Limit Type" name="limitType"
+          [model]="impurity.limitType" (valueChange)="impurity.limitType = $event">
+        </app-cv-input>
+  
+        <mat-form-field class="col-1">
+          <input matInput placeholder="Total Impurity" [(ngModel)]="impur.totalImpurity" name="totalImpurity" />
+        </mat-form-field>
+  
+        <mat-form-field class="col-1">
+          <input matInput placeholder="Unspecified Impurity" [(ngModel)]="impur.unspecifiedImpurity"
+            name="unspecifiedImpurity" />
+        </mat-form-field>
+      </div>
+  
+  
+      <div class="form-row borderbottom"> 
+        <div class="col-1">
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          <button mat-raised-button color="primary" (click)="addImpurity()" matTooltip="Add Impurity for Substance">
+            Add Identity Critieria
+          </button>
+        </div>
+        <app-cv-input class="col-1" domain="SSG_IMPURITY_TYPE" title="Identity Criteria Type" name="limitType"
+          [model]="impurity.limitType" (valueChange)="impurity.limitType = $event">
+        </app-cv-input>
+  
+        <mat-form-field class="col-1">
+          <input matInput placeholder="Amount Value" [(ngModel)]="impur.totalImpurity" name="totalImpurity" />
+        </mat-form-field>
+  
+      </div>
+  
+    </div> <!-- repeat -->
+
+    <br><br>
+
+    <div>
+      <h2><span class="colorblue">Unspecified Impurities</span></h2>
+    </div>
+    <div class="col-1">
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <button mat-raised-button color="primary" (click)="addImpurity()" matTooltip="Add Impurity for Substance">
+        Add Unspecified Impurity
+      </button>
+    </div>
+  
+    <div class="form-row">
+      <div>
+        <h2><span class="colorblue">Unspecified Impurities</span></h2>
+      </div>
+      <div class="col-1">
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <button mat-raised-button color="primary" (click)="addImpurity()" matTooltip="Add Impurity for Substance">
+          Add Unspecified Impurity
+        </button>
+      </div>
+    </div>
+  
+    <br><br>
+    <div class="bordergray padleft padright">
+      <div *ngFor="let impur of impurity.impuritiesList; let impIndex = index">
+    
+        <div class="form-row borderbottom">
+    
+          <div class="col-2 flex-column related-substance">
+    
+            <div class="related-substance-border">
+              {{(impIndex+1)}}
+              <!--
+            <app-substance-search-selector (selectionUpdated)="ingredientNameUpdated($event)"
+              (showMessage)="showMessageIngredientName($event)" eventCategory="ingredName" placeholder="Ingredient Name"
+              header="Ingredient Name" [subuuid]="impur.relatedSubstanceUuid">
+            </app-substance-search-selector>
+          -->
+              <app-substance-selector (selectionUpdated)="relatedSubstanceUpdated($event)"
+                eventCategory="substanceRelationshipRelatedSub" placeholder="Related Substance" [hideImage]="false"
+                header="Related Substance" [subuuid]="impur.relatedSubstanceUuid">
+              </app-substance-selector>
+            </div>
+    
+          </div>
+    
+          <app-cv-input class="col-1" domain="SSG_IMPURITY_TYPE" title="Impurity Type" name="source"
+            [model]="impurity.impurityType" (valueChange)="impurity.impurityType = $event">
+          </app-cv-input>
+    
+          <app-cv-input class="col-1" domain="SSG_IMPURITY_TYPE" title="Test Type" name="source" [model]="impurity.testType"
+            (valueChange)="impurity.testType = $event">
+          </app-cv-input>
+    
+          <mat-form-field class="col-1">
+            <input matInput placeholder="Limit" [(ngModel)]="impur.limit" name="limit" />
+          </mat-form-field>
+    
+        </div>
+    
+        <div class="form-row borderbottom"> 
+          <app-cv-input class="col-1" domain="SSG_IMPURITY_TYPE" title="Limit Type" name="limitType"
+            [model]="impurity.limitType" (valueChange)="impurity.limitType = $event">
+          </app-cv-input>
+    
+          <mat-form-field class="col-1">
+            <input matInput placeholder="Total Impurity" [(ngModel)]="impur.totalImpurity" name="totalImpurity" />
+          </mat-form-field>
+    
+          <mat-form-field class="col-1">
+            <input matInput placeholder="Unspecified Impurity" [(ngModel)]="impur.unspecifiedImpurity"
+              name="unspecifiedImpurity" />
+          </mat-form-field>
+        </div>
+    
+    
+        <div class="form-row borderbottom"> 
+          <div class="col-1">
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <button mat-raised-button color="primary" (click)="addImpurity()" matTooltip="Add Impurity for Substance">
+              Add Identity Critieria
+            </button>
+          </div>
+          <app-cv-input class="col-1" domain="SSG_IMPURITY_TYPE" title="Identity Criteria Type" name="limitType"
+            [model]="impurity.limitType" (valueChange)="impurity.limitType = $event">
+          </app-cv-input>
+    
+          <mat-form-field class="col-1">
+            <input matInput placeholder="Amount Value" [(ngModel)]="impur.totalImpurity" name="totalImpurity" />
+          </mat-form-field>
+    
+        </div>
+    
+      </div> <!-- repeat -->
+
+
+
+
+      <div>
+        <h2><span class="colorblue">Total Impurities</span></h2>
+      </div>
+
+      <br><br>
+      <div class="bordergray padleft padright">
+        <div *ngFor="let impur of impurity.impuritiesList; let impIndex = index">
+      
+          <div class="form-row borderbottom">
+      
+            <div class="col-2 flex-column related-substance">
+      
+              <div class="related-substance-border">
+                {{(impIndex+1)}}
+                <!--
+              <app-substance-search-selector (selectionUpdated)="ingredientNameUpdated($event)"
+                (showMessage)="showMessageIngredientName($event)" eventCategory="ingredName" placeholder="Ingredient Name"
+                header="Ingredient Name" [subuuid]="impur.relatedSubstanceUuid">
+              </app-substance-search-selector>
+            -->
+                <app-substance-selector (selectionUpdated)="relatedSubstanceUpdated($event)"
+                  eventCategory="substanceRelationshipRelatedSub" placeholder="Related Substance" [hideImage]="false"
+                  header="Related Substance" [subuuid]="impur.relatedSubstanceUuid">
+                </app-substance-selector>
+              </div>
+      
+            </div>
+      
+            <app-cv-input class="col-1" domain="SSG_IMPURITY_TYPE" title="Impurity Type" name="source"
+              [model]="impurity.impurityType" (valueChange)="impurity.impurityType = $event">
+            </app-cv-input>
+      
+            <app-cv-input class="col-1" domain="SSG_IMPURITY_TYPE" title="Test Type" name="source" [model]="impurity.testType"
+              (valueChange)="impurity.testType = $event">
+            </app-cv-input>
+      
+            <mat-form-field class="col-1">
+              <input matInput placeholder="Limit" [(ngModel)]="impur.limit" name="limit" />
+            </mat-form-field>
+      
+          </div>
+      
+          <div class="form-row borderbottom"> 
+            <app-cv-input class="col-1" domain="SSG_IMPURITY_TYPE" title="Limit Type" name="limitType"
+              [model]="impurity.limitType" (valueChange)="impurity.limitType = $event">
+            </app-cv-input>
+      
+            <mat-form-field class="col-1">
+              <input matInput placeholder="Total Impurity" [(ngModel)]="impur.totalImpurity" name="totalImpurity" />
+            </mat-form-field>
+      
+            <mat-form-field class="col-1">
+              <input matInput placeholder="Unspecified Impurity" [(ngModel)]="impur.unspecifiedImpurity"
+                name="unspecifiedImpurity" />
+            </mat-form-field>
+          </div>
+      
+      
+          <div class="form-row borderbottom"> 
+            <div class="col-1">
+              &nbsp;&nbsp;&nbsp;&nbsp;
+              <button mat-raised-button color="primary" (click)="addImpurity()" matTooltip="Add Impurity for Substance">
+                Add Identity Critieria
+              </button>
+            </div>
+            <app-cv-input class="col-1" domain="SSG_IMPURITY_TYPE" title="Identity Criteria Type" name="limitType"
+              [model]="impurity.limitType" (valueChange)="impurity.limitType = $event">
+            </app-cv-input>
+      
+            <mat-form-field class="col-1">
+              <input matInput placeholder="Amount Value" [(ngModel)]="impur.totalImpurity" name="totalImpurity" />
+            </mat-form-field>
+      
+          </div>
+      
+        </div> <!-- repeat -->
+        <br><br><br><br>
+        
+
 </div>

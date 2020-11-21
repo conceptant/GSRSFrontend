@@ -3,7 +3,7 @@ export interface Impurity {
   parentSubstanceId?: string;
   source?: string;
   type?: string;
-  specType: string;
+  specType?: string;
   createdBy?: string;
   createDate?: number;
   modifiedBy?: string;
@@ -15,8 +15,12 @@ export interface Impurity {
 export interface Impurities {
   id?: number;
   relatedSubstanceUuid?: string;
+  impurityType?: string;
   testType?: string;
   limit?: number;
+  limitType?: string;
+  totalImpurity?: string;
+  unspecifiedImpurity?: string;
   subRelationship?: SubRelationship;
 }
 

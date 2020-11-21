@@ -4,7 +4,7 @@ import { Observable, throwError, of } from 'rxjs';
 import { ConfigService } from '@gsrs-core/config';
 import { BaseHttpService } from '@gsrs-core/base';
 import { PagingResponse } from '@gsrs-core/utils';
-import { Impurity, ImpurityTest, Impurities, ValidationResults } from '../model/impurity.model';
+import { Impurity, Impurities, ValidationResults } from '../model/impurity.model';
 import { map, switchMap } from 'rxjs/operators';
 import { FacetParam, FacetHttpParams, FacetQueryResponse } from '@gsrs-core/facets-manager';
 import { Facet } from '@gsrs-core/facets-manager';
@@ -34,8 +34,8 @@ export class ImpurityService extends BaseHttpService {
       //  console.log('AFTER' + JSON.stringify(this.application));
     } else {
       this.impurity = {
-        impuritiesList: [],
-        impurityTestList: []
+        impuritiesList: []
+      //  impurityTestList: []
       };
     }
     //  });
@@ -94,8 +94,8 @@ export class ImpurityService extends BaseHttpService {
   }
 
   addNewTest(): void {
-    const newTest: ImpurityTest = {};
-    this.impurity.impurityTestList.unshift(newTest);
+  //  const newTest: ImpurityTest = {};
+   // this.impurity.impurityTestList.unshift(newTest);
   }
 
   addNewImpurities(): void {

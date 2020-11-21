@@ -87,7 +87,7 @@ export class ImpurityFormComponent implements OnInit {
             //   this.getVocabularies();
           }
         } else {
-          this.title = 'Register New Impurity';
+          this.title = 'Register Impurities';
           setTimeout(() => {
             this.gaService.sendPageView(`Impurity Register`);
             this.impurityService.loadImpurity();
